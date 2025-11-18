@@ -21,7 +21,7 @@
         </nav>
     </header>
 
-    <main class="main">
+    <main class="main row">
         <section class="main__tagging tagging col-3">
             <h2>Tagging</h2>
 
@@ -37,7 +37,7 @@
                     <input class=input name="name" id="tag-name" placeholder="e.g. Central Berlin" type="text" maxlength=10 required/>
                     <label for="tag-hashtag">Hashtag:</label>
                     <input class=input name="hashtag" id="tag-hashtag" placeholder="e.g. #ber" type="text" maxlength=10 pattern="#[a-zA-Z]+$"/>
-                    <input class=input id="tag-submit" type="submit" value="Add Tag">
+                    <input id="tag-submit" type="submit" value="Add Tag">
                 </fieldset>
                 <!-- ... your code here ... -->
 
@@ -60,7 +60,7 @@
                     <input class=input name="longitude" id="discovery-longitude" placeholder="8.390071" type="hidden" />
                     <label for="discovery-search">Search term or keywords:</label>
                     <input class=input name="search" id="discovery-search" placeholder="e.g. Berlin" type="text" />
-                    <input class=input id="discovery-submit" type="submit" value="Search" />
+                    <input class=input id="discovery-submit" type="submit" value="Search" disabled/>
                 </fieldset>
                 <!-- ... your code here ... -->
 
@@ -68,7 +68,7 @@
             </form>
             <!-- ############### VS1Lab 1a Form 2 End -->
 
-            <div class="discovery__wrapper">
+            <div class="discovery__wrapper row">
                 <div class="discovery__taglist col-5">
                     <ul class="discovery__results" id="discoveryResults">
                         <li>Castle (49.01379, 8.404435) #sight</li>

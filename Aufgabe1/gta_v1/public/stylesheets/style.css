@@ -114,14 +114,14 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 130px;
-  padding-left: 40px;
-  padding-right: 40px;
+  height: 8rem;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
   border: 1px solid var(--border-color);
 }
 
 .header__image {
-  width: 50px;
+  width: 3rem;
 }
 
 
@@ -136,32 +136,27 @@ a {
 /* ### TODO ### Styles for Tagging component */
 
 #tag-fieldset {
-  margin-top: 10px;
-  padding: 20px;
+  margin-top: 0.7rem;
+  padding: 1.25rem;
   display: grid;
 }
 
-#tag-fieldset label:not(legend) {
-  padding-bottom: 5px;
+#tag-fieldset label {
+  padding-bottom: 0.3rem;
 }
-
-/* #tag-fieldset legend {
-  font-weight: bold;
-} */
 
 #tag-fieldset input {
-  padding: 5px;
+  padding: 0.3rem;
 }
 
-#tag-fieldset #tag-longitude, #tag-latitude {
+#tag-longitude, #tag-latitude {
   background-color: var(--background-color);
   border: 1px solid var(--gray-color);
 }
 
-#tag-fieldset input:not(#tag-submit) {
-  margin-bottom: 15px;
+#tag-fieldset .input {
+  margin-bottom: 1rem;
   width: 100%;
-  padding: 5px;
 }
 
 
@@ -173,37 +168,36 @@ a {
 }
 
 .discovery__search {
-  margin-bottom: 40px;
+  margin-bottom: 2.5rem;
 }
 
 #discovery-fieldset {
-  margin-top: 10px;
-  padding: 20px;
+  margin-top: 0.7rem;
+  padding: 1.25rem;
   display: grid;
 }
 
 #discovery-fieldset input {
-  padding: 5px;
+  padding: 0.3rem;
   width: 25%;
-  margin-bottom: 15px;
+  margin-bottom: 1rem;
 }
 
 #discovery-fieldset label {
-  padding-bottom: 5px;
+  padding-bottom: 0.3rem;
 }
 
 #discoveryResults {
   text-align: center;
   color: var(--link-color);
-  margin-right: 40px;
 }
 
 #discoveryResults li {
   border: 1px solid var(--border-color);
   background-color: var(--background-color);
-  padding: 10px;
+  padding: 0.7rem;
   list-style: none;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
 }
 
 #map img {
@@ -223,7 +217,7 @@ a {
   background-color: var(--background-color);
   position: relative;
   margin-top: auto;
-  padding: 30px;
+  padding: 1.5rem;
   border: 1px solid var(--border-color);
 }
 
@@ -272,7 +266,7 @@ a {
   }
 
   #discoveryResults {
-    padding: 0px;
+    padding: 0;
     width: 100%;
   }
 

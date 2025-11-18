@@ -191,17 +191,6 @@ a {
 
 /* ### TODO ### Styles for Discovery component */
 
-.discovery {
-  background-color: white;
-  display: block;
-  padding-left: 20px;
-}
-
-.discovery h2 {
-  /* funktioniert nicht !!! */
-  font-weight: bold;
-}
-
 .discovery__wrapper {
   display: flex;
 }
@@ -212,45 +201,38 @@ a {
 
 #discovery-fieldset {
   margin-top: 10px;
-  padding: 2%;
+  padding: 20px;
   display: grid;
 }
 
 #discovery-fieldset input {
   padding: 5px;
   width: 25%;
-}
-
-#discovery-fieldset input:not(:last-of-type) {
   margin-bottom: 15px;
 }
 
-#discovery-fieldset input:last-of-type {
-  color: grey;
-}
-
-#discovery-fieldset label:not(legend) {
+#discovery-fieldset label {
   padding-bottom: 5px;
-}
-
-#discovery-fieldset legend {
-  font-weight: bold;
 }
 
 #discoveryResults {
   text-align: center;
-  font-weight: bold;
-  color: rgb(58, 209, 255);
-  margin-right: 50px;
+  color: var(--link-color);
+  margin-right: 40px;
 }
 
 #discoveryResults li {
-  background-color: #eeeeee;
-  border: 1px solid grey;
-  /* text-align: left; */
+  border: 1px solid var(--border-color);
+  background-color: var(--background-color);
   padding: 10px;
   list-style: none;
   margin-bottom: 20px;
+}
+
+#map img {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
 }
 
 #map {
@@ -258,17 +240,14 @@ a {
 }
 
 
-
 /* ### TODO ### Styles for Footer Component */
 
 .footer {
-  background-color: #eeeeee;
-  height: auto;
-  width: 100%;
+  background-color: var(--background-color);
   position: relative;
-  bottom: 0;
+  margin-top: auto;
   padding: 30px;
-  border: 1px solid lightgrey;
+  border: 1px solid var(--border-color);
 }
 
 /* ### TODO ### Media Queries */

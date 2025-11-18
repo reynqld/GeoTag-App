@@ -275,30 +275,39 @@ a {
 
 @media (max-width: 850px) {
 
-  section, input, .discovery__taglist, .discovery__map {
-    min-width: 100%;
-  }
+  /* Styles with mixed Selectors */
 
   main, section, #tag-form, .discovery{
     padding: 0;
     margin: 0;
   }
 
-  #tag-fieldset, #discovery-fieldset {
-    padding: 2rem;
-  }
-
-  footer {
-    padding: 1rem;
-    max-height: 4rem;
-  }
-
-  .discovery__title {
-    margin-top: 1.7rem;
-  }
-
   header, .main, .discovery__wrapper {
     flex-direction: column;
+  }
+
+  section, input, .discovery__taglist, .discovery__map {
+    min-width: 100%;
+  }
+
+  #tag-fieldset, #discovery-fieldset {
+    padding: 1.5rem;
+  }
+
+  /* Styles for HTML Elements */
+
+  header {
+    padding: 0.7rem;
+  }
+  
+  footer {
+    max-height: 5rem;
+  }
+
+  /* Styles for Discovery Components */
+
+  .discovery__title, #map {
+    margin-top: 1.7rem;
   }
 
   #mapView {

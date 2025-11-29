@@ -111,8 +111,6 @@ class MapManager {
     }
 }
 
-LocationHelper.findLocation(updateLocation);
-
 /**
  * TODO: 'updateLocation'
  * A function to retrieve the current location and update the page.
@@ -127,9 +125,21 @@ function updateLocation(locationHelper) {
     document.getElementById("tag-longitude").value = longitude;
     document.getElementById("discovery-latitude").value = latitude;
     document.getElementById("discovery-longitude").value = longitude;
+
+    let mapManager = new MapManager();
+
+    mapManager.initMap(latitude, longitude);
+    mapManager.updateMarkers(latitude, longitude);
+
+    const element = document.getElementById("mapView");
+    element.remove();
+
+    const element2 = document.getElementsByTagName("span");
+    element2[0].remove();
+
 }
 
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
-    alert("Please change the script 'geotagging.js'");
+    LocationHelper.findLocation(updateLocation);
 });

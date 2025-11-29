@@ -111,12 +111,23 @@ class MapManager {
     }
 }
 
+LocationHelper.findLocation(updateLocation);
+
 /**
  * TODO: 'updateLocation'
  * A function to retrieve the current location and update the page.
  * It is called once the page has been fully loaded.
  */
 // ... your code here ...
+function updateLocation(locationHelper) {
+    const latitude = locationHelper.latitude;
+    const longitude = locationHelper.longitude;
+
+    document.getElementById("tag-latitude").value = latitude;
+    document.getElementById("tag-longitude").value = longitude;
+    document.getElementById("discovery-latitude").value = latitude;
+    document.getElementById("discovery-longitude").value = longitude;
+}
 
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {

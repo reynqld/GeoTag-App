@@ -16,7 +16,6 @@ console.log("The geoTagging script is going to start...");
  */
 // ... your code here ...
 function updateLocation() {
-
     const callback = function (locationHelper) {
         const latitude = locationHelper.latitude;
         const longitude = locationHelper.longitude;

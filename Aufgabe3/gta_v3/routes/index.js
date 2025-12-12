@@ -32,6 +32,17 @@ const GeoTag = require('../models/geotag');
 const GeoTagStore = require('../models/geotag-store');
 const myStore = new GeoTagStore;
 
+
+// GeoTagExamples into Store
+const GeoTagExamples = require('../models/geotag-examples');
+const examplesArray = GeoTagExamples.tagList;
+
+for (const [name, latitude, longitude, hashtag] of examplesArray) {
+  myStore.addGeoTag(new GeoTag(name, latitude, longitude, hashtag));
+}
+
+
+
 /**
  * Route '/' for HTTP 'GET' requests.
  * (http://expressjs.com/de/4x/api.html#app.get.method)
@@ -72,16 +83,14 @@ router.post('/tagging', (req, res) => {
   const hashtag = req.body.hashtag;
 
   // create new GeoTag
-  //const myTag = GeoTag(name, lat, long, hashtag);
+  const myTag = new GeoTag(name, lat, long, hashtag);
 
   // store myTag
   console.log("GeoTag erstellt.");
-  myStore.addGeoTag(new GeoTag(name, lat, long, hashtag));
-
-  //get objects in proximity of geotag
+  myStore.addGeoTag(myTag);
 
   // render ejs-template
-  res.render('index', { taglist: myStore.getNearbyGeoTags() })
+  res.render('index', { taglist: myStore.getNearbyGeoTags(lat, long) })
 
 })
 
@@ -104,18 +113,8 @@ router.post('/tagging', (req, res) => {
 // TODO: ... your code here ...
 router.post('/discovery', (req, res) => {
 
-  // get tagging form from request body
-  // const lat = req.body.latitude;
-  // const long = req.body.longitude;
   const search = req.body.search;
-
-  // // store myTag
-  // GeoTagStore.addGeoTag(new GeoTag(name, lat, long, hashtag));
-
-  //get objects in proximity of geotag
-
-  // render ejs-template
-  res.render('index', { taglist: GeoTagStore.searchNearbyGeoTags(search) })
+  res.render('index', { taglist: myStore.searchNearbyGeoTags(search) })
 
 })
 

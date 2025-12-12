@@ -16,6 +16,7 @@ const path = require('path');
 const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
+const GeoTagExamples = require('./models/geotag-examples');
 
 /**
  * Set up Express app.
@@ -43,6 +44,7 @@ app.use(express.urlencoded({ extended: false }));
  */
 
 // TODO: ... your code here ...
+app.use(express.static(__dirname + '/public'));
 
 // Set dedicated script for routing
 app.use('/', indexRouter);

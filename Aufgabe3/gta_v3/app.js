@@ -43,6 +43,18 @@ app.use(express.urlencoded({ extended: false }));
  */
 
 // TODO: ... your code here ...
+const GeoTagStore = require('./models/geotag-store');
+const GeoTag = require('./models/geotag');
+const Examples = require('./models/geotag-examples')
+const geoTagStoreInstance = new GeoTagStore();
+
+const examplesArray = Examples.tagList;
+
+geoTagStoreInstance.addGeoTag(new GeoTag("Test", 4.5, 4.3, "#lmao"));
+for (const [name, latitude, longitude, hashtag] of examplesArray) {
+  geoTagStoreInstance.addGeoTag(new GeoTag(name, latitude, longitude, hashtag));
+}
+
 
 // Set dedicated script for routing
 app.use('/', indexRouter);

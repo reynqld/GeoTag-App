@@ -1,0 +1,274 @@
+/*
+  File origin: VS1LAB A1b  
+
+  CSS style is BEM. Classes used for CSS, IDs for JavaScript querying (future use).
+  CSS variables used for clarity and themability (e.g. through SSR). 
+  Inherited box sizing used for ease of including 3rd party content-box components.
+*/
+
+/* Global styling */
+
+html {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+
+  /* This approach prevents issues with 3rd party content-box components */
+  box-sizing: inherit;
+}
+
+
+/* Variables (example: see declaration for "a" below) */
+
+:root {
+  --link-color: #00B7FF;
+  --background-color: #efefef;
+  --border-color: #cdcdcd;
+  --gray-color: #666;
+}
+
+
+/* HTML element styles */
+
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+a {
+  color: var(--link-color);
+}
+
+/* ### TODO ### Styles for other HTML elements */
+
+/* ... your code here ... */
+
+
+/* Grid styles (no changes required) */
+
+.row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.col-1 {
+  width: calc(8.33% - 1rem);
+}
+
+.col-2 {
+  width: calc(16.66% - 1rem);
+}
+
+.col-3 {
+  width: calc(25% - 1rem);
+}
+
+.col-4 {
+  width: calc(33.33% - 1rem);
+}
+
+.col-5 {
+  width: calc(41.66% - 1rem);
+}
+
+.col-6 {
+  width: calc(50% - 1rem);
+}
+
+.col-7 {
+  width: calc(58.33% - 1rem);
+}
+
+.col-8 {
+  width: calc(66.66% - 1rem);
+}
+
+.col-9 {
+  width: calc(75% - 1rem);
+}
+
+.col-10 {
+  width: calc(83.33% - 1rem);
+}
+
+.col-11 {
+  width: calc(91.66% - 1rem);
+}
+
+.col-12 {
+  width: calc(100% - 1rem);
+}
+
+
+/* ### TODO ### Styles for Header Component */
+
+.header {
+  background-color: var(--background-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 8rem;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  border: 1px solid var(--border-color);
+}
+
+.header__image {
+  width: 3rem;
+}
+
+
+/* ### TODO ### Styles for Main Component */
+
+.main {
+  display: flex;
+  padding: 2rem;
+}
+
+
+/* ### TODO ### Styles for Tagging component */
+
+#tag-fieldset {
+  margin-top: 0.7rem;
+  padding: 1.25rem;
+  display: grid;
+}
+
+#tag-fieldset label {
+  padding-bottom: 0.3rem;
+}
+
+#tag-fieldset input {
+  padding: 0.3rem;
+}
+
+#tag-longitude, #tag-latitude {
+  background-color: var(--background-color);
+  border: 1px solid var(--gray-color);
+}
+
+#tag-fieldset .input {
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+
+
+/* ### TODO ### Styles for Discovery component */
+
+.discovery__wrapper {
+  display: flex;
+}
+
+.discovery__search {
+  margin-bottom: 2.5rem;
+}
+
+#discovery-fieldset {
+  margin-top: 0.7rem;
+  padding: 1.25rem;
+  display: grid;
+}
+
+#discovery-fieldset input {
+  padding: 0.3rem;
+  width: 25%;
+  margin-bottom: 1rem;
+}
+
+#discovery-fieldset label {
+  padding-bottom: 0.3rem;
+}
+
+#discoveryResults {
+  text-align: center;
+  color: var(--link-color);
+}
+
+#discoveryResults li {
+  border: 1px solid var(--border-color);
+  background-color: var(--background-color);
+  padding: 0.7rem;
+  list-style: none;
+  margin-bottom: 1.25rem;
+}
+
+#map img {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+}
+
+#map {
+  display: grid;
+  height: 500px;
+}
+
+
+/* ### TODO ### Styles for Footer Component */
+
+.footer {
+  background-color: var(--background-color);
+  position: relative;
+  margin-top: auto;
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+}
+
+/* ### TODO ### Media Queries */
+
+@media (max-width: 850px) {
+
+  /* Styles with mixed Selectors */
+
+  main, section, #tag-form, .discovery{
+    padding: 0;
+    margin: 0;
+  }
+
+  header, .main, .discovery__wrapper {
+    flex-direction: column;
+  }
+
+  section, input, .discovery__taglist, .discovery__map {
+    min-width: 100%;
+  }
+
+  #tag-fieldset, #discovery-fieldset {
+    padding: 1.5rem;
+  }
+
+  /* Styles for HTML Elements */
+
+  header {
+    padding: 0.7rem;
+  }
+  
+  footer {
+    max-height: 5rem;
+  }
+
+  /* Styles for Discovery Components */
+
+  .discovery__title, #map {
+    margin-top: 1.7rem;
+  }
+
+  #mapView {
+    display: block;
+    width: 100%;
+  }
+
+  #discoveryResults {
+    padding: 0;
+    width: 100%;
+  }
+
+}

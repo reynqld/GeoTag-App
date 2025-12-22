@@ -39,8 +39,70 @@ const GeoTagStore = require('../models/geotag-store');
  */
 
 router.get('/', (req, res) => {
-  res.render('index', { taglist: [] })
+  res.render('index', { taglist: [], longitude: 0, latitude: 0});
 });
+
+
+/**
+ * Route '/tagging' for HTTP 'POST' requests.
+ * (http://expressjs.com/de/4x/api.html#app.post.method)
+ *
+ * Requests cary the fields of the tagging form in the body.
+ * (http://expressjs.com/de/4x/api.html#req.body)
+ *
+ * Based on the form data, a new geotag is created and stored.
+ *
+ * As response, the ejs-template is rendered with geotag objects.
+ * All result objects are located in the proximity of the new geotag.
+ * To this end, "GeoTagStore" provides a method to search geotags 
+ * by radius around a given location.
+ */
+
+// TODO: Vielleicht  unnötig?
+router.post('/tagging', (req, res) => {
+
+  // get tagging form from request body
+  const name = req.body.name;
+  const lat = req.body.latitude;
+  const long = req.body.longitude;
+  const hashtag = req.body.hashtag;
+
+  // create new GeoTag
+  const myTag = new GeoTag(name, lat, long, hashtag);
+
+  // store myTag
+  console.log("GeoTag erstellt.");
+  myStore.addGeoTag(myTag);
+
+  // render ejs-template
+  res.render('index', { taglist: myStore.getNearbyGeoTags(lat, long), latitude: lat, longitude: long });
+
+})
+
+/**
+ * Route '/discovery' for HTTP 'POST' requests.
+ * (http://expressjs.com/de/4x/api.html#app.post.method)
+ *
+ * Requests cary the fields of the discovery form in the body.
+ * This includes coordinates and an optional search term.
+ * (http://expressjs.com/de/4x/api.html#req.body)
+ *
+ * As response, the ejs-template is rendered with geotag objects.
+ * All result objects are located in the proximity of the given coordinates.
+ * If a search term is given, the results are further filtered to contain 
+ * the term as a part of their names or hashtags. 
+ * To this end, "GeoTagStore" provides methods to search geotags 
+ * by radius and keyword.
+ */
+
+// TODO: Vielleicht  unnötig?
+router.post('/discovery', (req, res) => {
+const latitude = req.body.latitude;
+const longitude = req.body.longitude;
+const search = req.body.search;
+res.render('index', { taglist: myStore.searchNearbyGeoTags(latitude, longitude, search), latitude: latitude, longitude: longitude });
+
+})
 
 // API routes (A4)
 

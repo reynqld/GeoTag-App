@@ -26,30 +26,85 @@ const GeoTag = require("./geotag");
  * - Keyword matching should include partial matches from name or hashtag fields. 
  */
 class InMemoryGeoTagStore {
-    // TODO: ... your code here ...
 
     #geotags = [];
-    #proximity = 0.5;
+    #proximity = 0.005;
+    #nextId = 1;
+    #geotagIds = [];
 
+    /** returns id of new GeoTag */
     addGeoTag(GeoTag) {
+        let id = this.#nextId++;
+        while (this.doesIdExist(id)) {
+            id = this.#nextId++;
+        }
         this.#geotags.push(GeoTag);
+        this.#geotagIds.push(id);
+        return id;
     }
 
+    /** returns -1 if id already exists else returns the id */
+    addGeoTagWithId(id, GeoTag) {
+        if (this.doesIdExist(id)) {
+            return -1;
+        }
+
+        this.#geotags.push(GeoTag);
+        this.#geotagIds.push(id);
+        return id;
+    }
+
+    /** Delete Geotag by name */
     removeGeoTag(GeoTagName) {
         for (let i = 0; i < this.#geotags.length; i++) {
             if (this.#geotags[i].name == GeoTagName) {
                 this.#geotags.splice(i, 1);
+                this.#geotagIds.splice(i, 1);
                 return true;
             }
         }
         return false;
     }
 
+    /** returns the deleted GeoTag if nothing was deleted null is returned */
+    removeGeoTagWithId(id) {
+        if (this.doesIdExist(parseInt(id))) {
+            let index = this.#geotagIds.indexOf(parseInt(id));
+            this.#geotagIds.splice(index, 1);
+            return this.#geotags.splice(index, 1);
+        }
+        return null;
+    }
+
+    doesIdExist(id) {
+        for (let i = 0; i < this.#geotagIds.length; i++) {
+            if (this.#geotagIds[i] == id) { return true; }
+        }
+        return false;
+    }
+
+    getAllGeoTags() {
+        return this.#geotags;
+    }
+
+    /** return null if unable to find Geotag by id */
+    getGeoTagbyId(id) {
+        const index = this.#geotagIds.indexOf(parseInt(id));
+        if (index == -1) {
+            return null;
+        }
+        return this.#geotags[index];
+    }
+
+    changeGeoTagbyId(id, GeoTag) {
+        this.#geotags.splice(this.#geotagIds.indexOf(parseInt(id)), 1, GeoTag);
+    }
+
     getNearbyGeoTags(latitude, longitude) {
         let outputArray = [];
 
         for (let i = 0; i < this.#geotags.length; i++) {
-            if(this.compareLocations(this.#geotags[i], latitude, longitude)) {
+            if (this.compareLocations(this.#geotags[i], latitude, longitude)) {
                 outputArray.push(this.#geotags[i]);
             }
         }
@@ -58,11 +113,23 @@ class InMemoryGeoTagStore {
 
     searchNearbyGeoTags(latitude, longitude, searchString) {
         let outputArray = this.getNearbyGeoTags(latitude, longitude);
-        for (let i = outputArray.length -1; i >= 0; i--) {
+        for (let i = outputArray.length - 1; i >= 0; i--) {
             let currentName = outputArray[i].name;
             let currentTag = outputArray[i].hashtag;
-            if(!(currentName.toLowerCase().includes(searchString.toLowerCase()) || currentTag.toLowerCase().includes(searchString.toLowerCase()))) {
-                outputArray.splice(i,1);
+            if (!(currentName.toLowerCase().includes(searchString.toLowerCase()) || currentTag.toLowerCase().includes(searchString.toLowerCase()))) {
+                outputArray.splice(i, 1);
+            }
+        }
+        return outputArray;
+    }
+
+    searchGeoTags(searchString) {
+        let outputArray = Array.from(this.#geotags);
+        for (let i = outputArray.length - 1; i >= 0; i--) {
+            let currentName = outputArray[i].name;
+            let currentTag = outputArray[i].hashtag;
+            if (!(currentName.toLowerCase().includes(searchString.toLowerCase()) || currentTag.toLowerCase().includes(searchString.toLowerCase()))) {
+                outputArray.splice(i, 1);
             }
         }
         return outputArray;

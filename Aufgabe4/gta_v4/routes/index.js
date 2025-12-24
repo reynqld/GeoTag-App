@@ -53,6 +53,7 @@ router.get('/', (req, res) => {
   res.render('index', { taglist: [], longitude: 0, latitude: 0 });
 });
 
+// API routes (A4)
 
 /**
  * Route '/api/geotags' for HTTP 'GET' requests.
@@ -104,7 +105,7 @@ router.post('/api/geotags', (req, res) => {
   const hashtag = req.body.hashtag;
 
   // simple fail safe
-  if (!name || !latitude || !longitude || !hashtag) {
+  if (!name || !latitude || !longitude) {
     return res.status(400).send();
   }
 
@@ -166,7 +167,7 @@ router.put('/api/geotags/:id', function (req, res) {
   const hashtag = req.body.hashtag;
 
   // simple fail safe
-  if (!name || !latitude || !longitude || !hashtag || !id) {
+  if (!name || !latitude || !longitude || !id) {
     return res.status(400).send();
   }
   const changedTag = new GeoTag(name, latitude, longitude, hashtag);
